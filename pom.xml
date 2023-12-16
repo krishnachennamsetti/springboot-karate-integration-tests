@@ -16,6 +16,9 @@
     <description>Karate Integration Tests</description>
     <properties>
         <java.version>17</java.version>
+        <karate.junit5.version>1.4.1</karate.junit5.version>
+        <maven.faisafe.version>3.2.2</maven.faisafe.version>
+        <jacoco.plugin.version>0.8.11</jacoco.plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -48,6 +51,14 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Karate dependencies -->
+        <dependency>
+            <groupId>com.intuit.karate</groupId>
+            <artifactId>karate-junit5</artifactId>
+            <version>${karate.junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -59,9 +70,27 @@
             </plugin>
 
             <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven.faisafe.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/*IT.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.11</version>
+                <version>${jacoco.plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
