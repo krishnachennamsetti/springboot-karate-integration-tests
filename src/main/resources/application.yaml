@@ -1,0 +1,8 @@
+karate:
+  rest:
+  endpoint: https://yesno.wtf/api
+
+server:
+  servlet:
+    contextpath: /karate
+  port: 8080
